@@ -1,0 +1,29 @@
+#D:\Documents\LockNFC\Captivate Design/.plotProps/proximityAndGuard_BarPlot.props Plotter Data
+#Mon Nov 12 22:10:39 GMT 2018
+Signal.alias.Touch\ Threshold=
+Signal.alias.GRID=
+xlabel=Time
+Delta=on
+horiz_data_grid=true
+vert_data_grid=false
+ylabel=Channel Data
+Signal.alias.Lta=
+GRID=on
+labelFont=helvetica-BOLD-12
+Signal.alias.Count=
+xrangetype=false
+Lta=on
+xmin=-1.000000
+Count=on
+titleFont=helvetica-BOLD-24
+xmax=2.000000
+legendFont=helvetica-BOLD-14
+ymin=0.000000
+Prox\ Threshold=on
+ymax=1000.000000
+yrangetype=false
+graphtype=PtsCon
+Touch\ Threshold=on
+Signal.alias.Prox\ Threshold=
+persistence=2000
+Signal.alias.Delta=

@@ -1,0 +1,9 @@
+Sensor, Electrode, MCU Pin, Package Pin
+numericKeypad,RX00,CAP0.1,17
+numericKeypad,RX01,CAP0.2,18
+numericKeypad,RX02,CAP0.3,19
+numericKeypad,TX00,CAP2.0,25
+numericKeypad,TX01,CAP2.1,26
+numericKeypad,TX02,CAP2.2,27
+numericKeypad,TX03,CAP2.3,28
+proximityAndGuard,RX00,CAP3.0,29

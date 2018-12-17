@@ -1,0 +1,29 @@
+#D:\Documents\LockNFC\Captivate Design/.plotProps/MSP430FR2633IDA_BarPlot.props Plotter Data
+#Sat Nov 10 20:09:05 GMT 2018
+Signal.alias.Touch\ Threshold=
+Signal.alias.GRID=
+xlabel=Time
+Delta=on
+horiz_data_grid=true
+ylabel=Channel Data
+vert_data_grid=false
+Signal.alias.Lta=
+GRID=on
+labelFont=helvetica-BOLD-12
+Signal.alias.Count=
+xrangetype=false
+Lta=on
+Count=on
+titleFont=helvetica-BOLD-24
+xmin=-1.000000
+xmax=14.000000
+legendFont=helvetica-BOLD-14
+ymin=0.000000
+Prox\ Threshold=on
+yrangetype=false
+ymax=1000.000000
+Touch\ Threshold=on
+graphtype=PtsCon
+Signal.alias.Prox\ Threshold=
+persistence=2000
+Signal.alias.Delta=

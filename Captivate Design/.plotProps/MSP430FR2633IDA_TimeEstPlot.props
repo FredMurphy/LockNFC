@@ -1,0 +1,21 @@
+#D:\Documents\LockNFC\Captivate Design/.plotProps/MSP430FR2633IDA_TimeEstPlot.props Plotter Data
+#Sat Nov 10 20:09:05 GMT 2018
+--Scan\ Period--=on
+xlabel=Time
+ylabel=Channel Data
+labelFont=helvetica-BOLD-12
+Signal.alias.--Sensors\ Total--=3.510ms
+titleFont=helvetica-BOLD-24
+xmin=0.000000
+proximityAndGuard=on
+Signal.alias.numericKeypad=3.240ms
+xmax=42.900000
+Signal.alias.--Scan\ Period--=33.000ms
+legendFont=helvetica-BOLD-14
+ymin=0.000000
+ymax=2.000000
+graphtype=PtsCon
+persistence=2000
+numericKeypad=on
+--Sensors\ Total--=on
+Signal.alias.proximityAndGuard=0.270ms

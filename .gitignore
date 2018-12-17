@@ -1,0 +1,10 @@
+# Recommended to be ignored for CCS
+/.jxbrowser-data
+/.metadata
+/.tempFiles
+/RemoteSystemsTempFiles
+/Debug
+/Release
+/.xdchelp
+/config
+/.launches

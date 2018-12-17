@@ -1,0 +1,23 @@
+#D:\Documents\LockNFC\Captivate Design/.plotProps/proximityAndGuard_OscilloscopePlot.props Plotter Data
+#Mon Nov 12 22:10:39 GMT 2018
+Signal.alias.E00\ Prox=
+xlabel=Time
+horiz_data_grid=true
+vert_data_grid=false
+ylabel=Channel Data
+E00\ Delta=off
+Signal.alias.E00\ Delta=
+labelFont=helvetica-BOLD-12
+xrangetype=true
+titleFont=helvetica-BOLD-24
+Signal.alias.E00\ Lta=
+legendFont=helvetica-BOLD-14
+E00\ Count=on
+E00\ Touch=off
+Signal.alias.E00\ Count=
+Signal.alias.E00\ Touch=
+yrangetype=true
+graphtype=PtsCon
+persistence=2000
+E00\ Prox=off
+E00\ Lta=on

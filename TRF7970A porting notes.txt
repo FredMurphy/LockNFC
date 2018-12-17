@@ -1,0 +1,245 @@
+TRF7970ABP pinout
+  
+  VCC   1   20  GND
+        2   19
+        3   18  IRQ1
+        4   17
+        5   16
+        6   15  MOSI
+  CLK   7   14  MISO
+  IRQ2  8   13  LED_15693
+  SS    9   12  LED_14443A
+  EN   10   10  LED_14443B
+
+TRF7970A commands and timing
+
+  TRF79xxA_setupInitiator(0x88)
+    83 80            	    TRF79xxA_reset();
+    00 20 	              TRF79xxA_turnRfOn();
+    01 88 (RF start)      TRF79xxA_writeRegister(TRF79XXA_ISO_CONTROL,ui8IsoControl);
+    09 01                 TRF79xxA_writeRegister(TRF79XXA_MODULATOR_CONTROL, 0x01);
+    14 0C                 TRF79xxA_writeRegister(TRF79XXA_FIFO_IRQ_LEVELS, 0x0C);
+    18 00                 TRF79xxA_writeRegister(TRF79XXA_NFC_TARGET_LEVEL, 0x00);
+    
+  ISO14443A_selectTag(ui8Command = REQA = 0x26)
+    10 00                 TRF79xxA_writeRegister(TRF79XXA_SPECIAL_FUNCTION_1,0x00);
+
+  ISO14443A_sendPollCmd(ui8Command)
+    8F 90 3D 00 0F 26     TRF79xxA_writeRaw() - reset FIFO and send REQA
+
+  TRF79xxA_waitRxData()
+  TRF79xxA_waitTxIRQ()
+  TRF79xxA_waitRxIRQ()
+    4C  00                TRF79xxA_readIrqStatus()
+    00  xx
+        00 = TRF79XXA_IRQ_STATUS_IDLE
+        01 = TRF79XXA_IRQ_STATUS_NO_RESPONSE
+        02 = TRF79XXA_IRQ_STATUS_COLLISION_ERROR
+        04 = TRF79XXA_IRQ_STATUS_FRAMING_ERROR
+        08 = TRF79XXA_IRQ_STATUS_PARITY_ERROR
+        10 = TRF79XXA_IRQ_STATUS_CRC_ERROR
+        20 = TRF79XXA_IRQ_STATUS_FIFO_HIGH_OR_LOW
+        40 = TRF79XXA_IRQ_STATUS_RX_COMPLETE
+        80 = TRF79XXA_IRQ_STATUS_TX_COMPLETE         sends 8F reset FIFO
+                
+                
+  Correct operation with tag
+    Breakpoint at TRF79xxA_writeRaw()
+    130us after we get IRQ. ReadIrqStatus returns TX_COMPLETE
+    410us after we get IRQ. ReadIrqStatus returns RX_COMPLETE
+  Correct operation no tag
+    Breakpoint at TRF79xxA_writeRaw()
+    Same 140us IRQ for TX_COMPLETE
+    We get no IRQ for RX_COMPLETE
+    Timer triggers at 9.5ms. ReadIrqStatus return IDLE
+ 
+
+NFC on FR2633
+
+  SPI on UCB0
+    CLK       1.1
+    MOSI      1.2
+    MISO      1.3
+    
+  SS          1.5
+  IRQ         1.0
+  TRF_EN      1.4
+  
+  RED_LED     1.6
+  GREEN_LED   1.7
+
+  
+G2533
+    SPI 2MHz (1 clock per 500ns)
+    TIMER0_A0_VECTOR 20ms (continuous if no tag, only a couple if found
+  mcu.c
+    MCU_initClock()
+      DCO 8MHz
+      ACLK = 6kHz (via VLO)
+    
+ G2533 and TA at 1.5kHz and counts 3* ms required
+  trf7970x.c    Trf797xIrqWaitTimeout
+  mcu.h         
+ 
+
+  
+FR2633 wiring
+uC end
+  red     black
+  -       -
+  yellow  -
+  blue    -
+  -       -
+  -       -
+  -       -
+  white   green
+  purple  -
+  grey    -
+  
+BP end
+IRQ position 2! Remove jumpers on uC board
+Using UCB0
+  r       black
+  -       -
+  -       -
+  -       -
+  -       -
+  -       grey
+  white   purple
+  green   -
+  blue    -
+  yellow  -
+
+Using UCA0
+  r       black
+  -       -
+  grey    -
+  purple  -
+  -       -
+  -       -
+  -       -
+  -       green
+  blue    -
+  yellow  white
+  
+  
+FR2633 pin usage
+  TRF7970A          QFN32
+    IRQ       1.0     7
+    SPI_CLK   1.1     8
+    SPI_MOSI  1.2     9
+    SPI_MISO  1.3    10
+    TRF_EN    1.4     3
+    TRF_SS    1.5     4
+  LEDs
+    LED_1     1.6     5
+    LED_2     1.7     8
+  XTAL
+    XOUT      2.0    29
+    XIN       2.1    30
+  Cap touch numeric pad
+    CAP0.0    3.0    12   RX00
+    CAP0.1           13   TX00
+    CAP0.2    2.3    14   TX01
+    CAP0.3           15   TX02
+    CAP1.0    3.1    16   RX01
+    CAP2.0    3.0    21   RX02
+    CAP3.0           25   RX03
+    
+QFN
+ 1    RST_
+ 2    TEST
+ 3    P1.4/UCA0         TRF_EN    (Move to free up UCA0)
+ 4    P1.5/UCA0         TRF_SS    (Move to free up UCA0)
+ 5    P1.6/UCA0         (LED_1)   (Move to free up UCA0)
+ 6    P1.7/UCA0         (LED_2)   (Move to free up UCA0)
+ 7    P1.0/UCB0         IRQ       Maybe move to use as TRF STE
+ 8    P1.1/UCB0         SPI_CLK
+ 
+ 9    P1.2/UCB0         SPI_MOSI
+10    P1.3/UCB0         SPI_MISO
+11    P2.2
+12    P3.0/CAP0.0       RX00
+13    CAP0.1            TX00
+14    P2.3/CAP0.2       TX01
+15    CAP0.3            TX02
+16    P3.1/UCA1/CAP1.0  RX01      (Move to free up UCA1)
+
+17    P2.4/UCA1/CAP1.1  RX02      (Move to free up UCA1)
+18    P2.5/UCA1/CAP1.2  RX03      (Move to free up UCA1)
+19    P2.6/UCA1/CAP1.3
+20    VREG
+21    CAP2.0 (Use these instead to free up UCA1
+22    CAP2.1
+23    CAP2.2
+24    CAP2.3
+
+25    P2.7/CAP3.0
+26    CAP3.1
+27    P3.2/CAP3.2
+28    CAP3.3
+29    P2.0/XOUT         XTAL
+30    P2.1/XIN          XTAL
+31    DVSS              GND
+32    DVCC              3.3V
+
+
+TSSOP with shifted pin usage
+ 1    P2.0/XOUT         XTAL
+ 2    P2.1/XIN          XTAL
+ 3    DVSS              GND
+ 4    DVCC              3.3V
+ 5    RST_
+ 6    TEST
+ 7    P1.4/UCA0         SPI_MOSI
+ 8    P1.5/UCA0         SPI_MISO
+ 9    P1.6/UCA0         SPI_CLK
+10    P1.7/UCA0         
+11    P1.0/UCB0         LED_R
+12    P1.1/UCB0         LED_G
+13    P1.2/UCB0         LED_B
+14    P1.3/UCB0         TRF_EN
+15    P2.2              TRF_IRQ
+16    P3.0/CAP0.0       TRF_SS
+
+17    CAP0.1            TX00
+18    P2.3/CAP0.2       TX01
+19    CAP0.3            TX02
+20    P3.1/UCA1/CAP1.0
+21    P2.4/UCA1/CAP1.1
+22    P2.5/UCA1/CAP1.2
+23    P2.6/UCA1/CAP1.3
+24    VREG
+25    CAP2.0            RX00
+26    CAP2.1            RX01
+27    CAP2.2            RX02
+28    CAP2.3            RX03
+29    P2.7/CAP3.0       Guard
+30    CAP3.1
+31    P3.2/CAP3.2
+32    CAP3.3
+
+Notes:
+  UCA supports SPI or UART
+  UCB supports SPI or I2C
+  
+  UCA0 - TRF7970A
+  UCA1 - Free for comms to CC1310
+  UCB0 - Perhaps LED driver?
+
+Prox
+  Conversion Count            800
+  Frequency Divider           f/8
+  Runtime recalibration enable  Y
+  Prox Threshold               10
+  Touch Threshold               5
+  Negative touch threshold     20
+  
+Keypad
+  Conversion Count            150
+  Frequency Divider           f/2
+  Runtime recalibration enable  Y
+  Prox Threshold                7
+  Touch Threshold              15
+  Negative touch threshold     20
+  
