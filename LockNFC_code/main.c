@@ -90,6 +90,8 @@ void main(void)
     LED_BLUE;
     LED_OFF;
 
+    initTimeout();
+
 	capTouchInit();
 	nfcInit();
 	nfcDuty = NFC_DUTY_RATIO;
@@ -134,8 +136,7 @@ void main(void)
                 }
                 break;
             case Opening:
-                // For now, reset back immediately. Will have timer.
-                stateActive();
+                // For now, do nothing until timer expires
                 break;
 	    }
 
@@ -149,7 +150,7 @@ void main(void)
 void openDoor(void) {
     state = Opening;
     LED_GREEN;
-
+    startTimeout(3);
     // Actually open the door!
 
 

@@ -16,6 +16,7 @@
 #include "CAPT_BSP.h"                    // CapTIvate EVM Board Support Package
 #include "nfc.h"
 #include "nfc_app.h"
+#include "timer.h"
 
 void stateActive(void);
 void openDoor(void);

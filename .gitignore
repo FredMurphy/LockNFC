@@ -3,8 +3,8 @@
 /.metadata
 /.tempFiles
 /RemoteSystemsTempFiles
-/Debug
-/Release
 /.xdchelp
 /config
-/.launches
+.launches
+Debug
+Release
