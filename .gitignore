@@ -8,3 +8,4 @@
 .launches
 Debug
 Release
+*.txt
