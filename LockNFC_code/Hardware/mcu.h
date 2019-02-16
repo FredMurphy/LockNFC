@@ -106,6 +106,14 @@
 #define LED_BLUE_ON                                    (LED1_POUT &= ~LED3_PIN)
 #define LED_OFF                 (LED1_POUT |= (LED1_PIN | LED2_PIN | LED3_PIN))
 
+// Lock output
+#define DOOR_POUT                                                       (P2OUT)
+#define DOOR_SINGLE_BIT                                                  (BIT5)
+#define DOOR_DOUBLE_BIT                                                  (BIT6)
+#define DOOR_SINGLE_ON                           (DOOR_POUT |= DOOR_SINGLE_BIT)
+#define DOOR_DOUBLE_ON                           (DOOR_POUT |= DOOR_DOUBLE_BIT)
+#define DOOR_OFF            (DOOR_POUT &= ~(DOOR_SINGLE_BIT | DOOR_DOUBLE_BIT))
+
 //SS 3.0
 #define SLAVE_SELECT_PORT_SET   P3DIR |= BIT0
 #define SLAVE_SELECT_HIGH       P3OUT |= BIT0

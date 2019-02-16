@@ -2,17 +2,18 @@
  * nfc.c
  *
  *  Created on: 19 Nov 2018
- *      Author: fred2
+ *      Author: 0xFRED
  */
 #include "nfc.h"
 #include "nfc_app.h"
+#include "secrets.h"
 
 #define MAX_TAG_LENGTH 16
 #define MAX_TAGS 5
 
 uint8_t validTags[MAX_TAG_LENGTH * MAX_TAGS];
 
-uint8_t fredTag[7] = {0x04, 0xf3, 0x05, 0x12, 0xff, 0x38, 0x84};
+uint8_t fredTag[7] = FRED_TAG_ID;
 
 
 void checkComms(void)

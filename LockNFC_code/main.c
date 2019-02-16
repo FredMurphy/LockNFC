@@ -1,57 +1,14 @@
-/* --COPYRIGHT--,BSD
- * Copyright (c) 2017, Texas Instruments Incorporated
- * All rights reserved.
+/*
+ * LockNFC
  *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions
- * are met:
+ * A combination of:
+ *   NFC reader tuned for implanted tags
+ *   Capacitive touch keypad
  *
- * *  Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer.
+ *  Created on: 2019
+ *      Author: 0xFRED
  *
- * *  Redistributions in binary form must reproduce the above copyright
- *    notice, this list of conditions and the following disclaimer in the
- *    documentation and/or other materials provided with the distribution.
- *
- * *  Neither the name of Texas Instruments Incorporated nor the names of
- *    its contributors may be used to endorse or promote products derived
- *    from this software without specific prior written permission.
- *
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
- * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
- * THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
- * PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR
- * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
- * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
- * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;
- * OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
- * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
- * OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
- * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- * --/COPYRIGHT--*/
-//*****************************************************************************
-// Development main.c for MSP430FR2633, MSP430FR2533, MSP430FR2632, and
-// MSP430FR2532.
-//
-// This starter application initializes the CapTIvate touch library
-// for the touch panel specified by CAPT_UserConfig.c/.h via a call to
-// CAPT_appStart(), which initializes and calibrates all sensors in the
-// application, and starts the CapTIvate interval timer.
-//
-// Then, the capacitive touch interface is driven by calling the CapTIvate
-// application handler, CAPT_appHandler().  The application handler manages
-// whether the user interface (UI) is running in full active scan mode, or
-// in a low-power wake-on-proximity mode.
-//
-// The CapTIvate application handler will return true if proximity was
-// detected on any of the sensors in the application, which is used here
-// to control the state of LED2. LED1 is set while the background loop enters
-// the handler, and is cleared when the background loop leaves the handler.
-//
-// \version 1.60.00.03
-// Released on November 22, 2017
-//
-//*****************************************************************************
+ */
 
 #include "main.h"
 
@@ -150,8 +107,8 @@ void main(void)
 void openDoor(void) {
     state = Opening;
     LED_GREEN;
+    DOOR_SINGLE_ON;
     startTimeout(3);
-    // Actually open the door!
 
 
 }
@@ -159,6 +116,7 @@ void openDoor(void) {
 void stateActive(void) {
     state = Active;
     LED_OFF;
+    DOOR_OFF;
 }
 
 void showFail(void) {

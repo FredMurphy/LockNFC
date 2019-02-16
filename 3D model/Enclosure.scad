@@ -89,6 +89,6 @@ module slot() {
        }
 }
 
-//upper();
-lower();
+upper();
+//lower();
 //%PCB();
