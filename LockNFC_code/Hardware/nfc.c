@@ -14,6 +14,9 @@
 uint8_t validTags[MAX_TAG_LENGTH * MAX_TAGS];
 
 uint8_t fredTag[7] = FRED_TAG_ID;
+uint8_t keyfob1[4] = KEYFOB_1;
+uint8_t keyfob2[4] = KEYFOB_2;
+uint8_t keyfob3[4] = KEYFOB_EZON;
 
 
 void checkComms(void)
@@ -60,7 +63,9 @@ void nfcInit(void) {
 
     clearTags();
     storeTag(fredTag, ISO14443A_UID_DOUBLE);
-    storeTag(fredTag, ISO14443A_UID_DOUBLE);
+    storeTag(keyfob1, ISO14443A_UID_SINGLE);
+    storeTag(keyfob2, ISO14443A_UID_SINGLE);
+    storeTag(keyfob3, ISO14443A_UID_SINGLE);
 }
 
 

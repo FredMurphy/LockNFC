@@ -80,7 +80,7 @@
 #define CAPT_SENSOR_COUNT                     (2)
 #define CAPT_INTERFACE  (__CAPT_NO_INTERFACE__)
 #define CAPT_CONDUCTED_NOISE_IMMUNITY_ENABLE  (false)
-#define CAPT_WAKEONPROX_ENABLE  (false)
+#define CAPT_WAKEONPROX_ENABLE  (true)
 #define CAPT_WAKEONPROX_SENSOR  (proximityAndGuard)
 #define CAPT_TRACKPAD_ENABLE  (false)
 #define CAPT_CAL_ALG  (__CAPT_STD_CALIBRATION__)

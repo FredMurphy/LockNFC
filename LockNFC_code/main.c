@@ -15,15 +15,6 @@
 tISO14443A_UidSize uidSize;
 uint8_t *uid;
 
-enum
-{
-    Active,
-    Opening,
-    AddTag,
-    AddCode
-};
-typedef uint8_t tState;
-
 tState state = Active;
 uint8_t nfcStatus;
 uint16_t pause;
@@ -42,10 +33,8 @@ void main(void)
 	BSP_configureMCU();
 	__bis_SR_register(GIE);
 
-	LED_RED;
-    LED_GREEN;
-    LED_BLUE;
     LED_OFF;
+    DOOR_OFF;
 
     initTimeout();
 
@@ -83,7 +72,7 @@ void main(void)
 
                     if (state == Active) {
                         if (tagPermitted(uid)) {
-                            openDoor();
+                            chooseDoor();
                         } else {
                             showFail();
                         }
@@ -91,6 +80,10 @@ void main(void)
                         storeTag(uid, uidSize);
                     }
                 }
+                break;
+            case ChooseDoor:
+                // Check CapTouch
+                CAPT_appHandler();
                 break;
             case Opening:
                 // For now, do nothing until timer expires
@@ -104,13 +97,28 @@ void main(void)
 	} // End background loop
 } // End main()
 
-void openDoor(void) {
-    state = Opening;
+
+void chooseDoor(void) {
+    state = ChooseDoor;
     LED_GREEN;
-    DOOR_SINGLE_ON;
-    startTimeout(3);
+    startTimeout(10);
+}
 
+void openDoor(uint8_t door) {
+    switch(door) {
+        case '1':
+            DOOR_SINGLE_ON;
+            break;
+        case '2':
+            DOOR_DOUBLE_ON;
+            break;
+        default:
+            return;
+    }
 
+    state = Opening;
+    LED_YELLOW;
+    startTimeout(1);
 }
 
 void stateActive(void) {
@@ -121,4 +129,5 @@ void stateActive(void) {
 
 void showFail(void) {
     LED_RED;
+    startTimeout(3);
 }

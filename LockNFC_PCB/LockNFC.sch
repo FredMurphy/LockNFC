@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE eagle SYSTEM "eagle.dtd">
-<eagle version="9.2.2">
+<eagle version="9.3.1">
 <drawing>
 <settings>
 <setting alwaysvectorfont="no"/>
@@ -7336,12 +7336,12 @@ Source: http://www.mouser.com/ds/2/392/products_18-2245.pdf</description>
 <part name="GND24" library="supply1" deviceset="GND" device=""/>
 <part name="GND25" library="supply1" deviceset="GND" device=""/>
 <part name="+3V6" library="FredMiscellaneous" deviceset="+3V3" device=""/>
-<part name="C46" library="FredMiscellaneous" deviceset="C-EU" device="C0805" value="27p"/>
-<part name="C47" library="FredMiscellaneous" deviceset="C-EU" device="C0805" value="27p"/>
-<part name="C48" library="FredMiscellaneous" deviceset="C-EU" device="C0805" value="68p"/>
+<part name="C46" library="FredMiscellaneous" deviceset="C-EU" device="C0805" value="68pF"/>
+<part name="C47" library="FredMiscellaneous" deviceset="C-EU" device="C0805" value="15pF"/>
+<part name="C48" library="FredMiscellaneous" deviceset="C-EU" device="C0805" value="100pF"/>
 <part name="R11" library="FredMiscellaneous" deviceset="R-EU_" device="R0805" value="1k2"/>
 <part name="Q3" library="crystal_txc" deviceset="CRYSTAL_TXC" device="" value="13.56MHz"/>
-<part name="C49" library="FredMiscellaneous" deviceset="C-EU" device="C0805" value="10p"/>
+<part name="C49" library="FredMiscellaneous" deviceset="C-EU" device="C0805" value="47pF"/>
 <part name="J2" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-EU_" device="R0402" package3d_urn="urn:adsk.eagle:package:23547/2"/>
 <part name="FR2633" library="0xfred" deviceset="MSP430FR2633" device="TSSOP"/>
 <part name="U$1" library="0xfred" deviceset="LED_RGB_CA" device="PLCC4-REVERSE"/>

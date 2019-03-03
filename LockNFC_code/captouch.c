@@ -69,8 +69,10 @@ void numericKeypadHandler(tSensor* pSensor) {
     {
         LED_BLUE_ON;
         button = numericKeypad_Params.ui16DominantElement;
-        if (addKeyPressAndCompare(keys[button])) {
-            openDoor();
+        if (state == ChooseDoor) {
+            openDoor(keys[button]);
+        } else if (addKeyPressAndCompare(keys[button])) {
+            chooseDoor();
 
         }
     }

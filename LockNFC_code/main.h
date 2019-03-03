@@ -18,8 +18,20 @@
 #include "nfc_app.h"
 #include "timer.h"
 
+enum
+{
+    Active,
+    ChooseDoor,
+    Opening,
+    AddTag,
+    AddCode
+};
+typedef uint8_t tState;
+extern tState state;
+
 void stateActive(void);
-void openDoor(void);
+void chooseDoor(void);
+void openDoor(uint8_t door);
 void showFail(void);
 
 
