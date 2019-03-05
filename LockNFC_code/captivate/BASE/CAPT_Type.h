@@ -1425,6 +1425,11 @@ enum
 	//
 	eUIActive,
 	
+    //
+    //! eUIActive indicates that the UI is the active state, but wasn't woken by touch
+    //
+	eUIActiveNoTouch,
+
 	//
 	//! eUIWakeOnProx indicates that the UI is the autonomous state
 	//

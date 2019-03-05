@@ -14,9 +14,9 @@ cutY = wallThick+1;
 
 boxX = pcbX + 2* wallInner;
 boxY = pcbY + 2* wallInner;
-boxZ = 20;
+boxZ = 25;
 
-fixZ = boxZ-7;
+fixZ = boxZ-12;
 fixY = 7;
 
 module main() {
@@ -58,8 +58,12 @@ module m3screw() {
 }
 
 module cable() {
-    translate([boxX/2,boxY/2,-1])
-        cylinder(r=7.5,h=boxZ);
+cableY=62;
+
+    translate([wallThick, (boxY-cableY)/2, -1])
+            cube([boxX-2*wallThick,cableY, boxZ]);
+    //translate([boxX/2,boxY/2,-1])
+    //    cube([7.5,7.5,boxZ], center=true);
 }
 
 module mounting() {
@@ -90,5 +94,5 @@ module slot() {
 }
 
 upper();
-//lower();
+lower();
 //%PCB();

@@ -132,6 +132,7 @@ bool CAPT_appHandler(void)
     switch (g_uiApp.state)
     {
         case eUIActive:
+        case eUIActiveNoTouch:
             if (g_bConvTimerFlag == true)
             {
                 //
@@ -198,10 +199,10 @@ bool CAPT_appHandler(void)
                 // stop autonomous mode and reload an active session
                 //
                 CAPT_stopWakeOnProxMode(&CAPT_WAKEONPROX_SENSOR, 0);
+                g_uiApp.state = g_bDetectionFlag ? eUIActive : eUIActiveNoTouch;
                 g_bDetectionFlag = false;
                 g_bConvCounterFlag = false;
                 g_bMaxCountErrorFlag = false;
-                g_uiApp.state = eUIActive;
                 g_ui16UISessionTimeoutCtr = g_uiApp.ui16InactivityTimeout;
 
                 //

@@ -11,6 +11,7 @@
  */
 
 #include "main.h"
+#include "CAPT_Type.h"
 
 tISO14443A_UidSize uidSize;
 uint8_t *uid;
@@ -19,7 +20,9 @@ tState state = Active;
 uint8_t nfcStatus;
 uint16_t pause;
 uint8_t nfcDuty;
-#define NFC_DUTY_RATIO 8
+#define NFC_DUTY_RATIO 4
+
+extern tCaptivateApplication g_uiApp;
 
 void main(void)
 {
@@ -60,11 +63,13 @@ void main(void)
             case AddTag:
                 // Check CapTouch
                 CAPT_appHandler();
+
+                if (g_uiApp.state == eUIActiveNoTouch)
+                    break;
                 // Only scan NFC every N times for captouch performance
                 if (--nfcDuty)
                     break;
                 nfcDuty = NFC_DUTY_RATIO;
-
                 nfcStatus = NFC_Find14443A();
                 if (nfcStatus == STATUS_SUCCESS) {
                     uidSize = ISO14443A_getUidSize();
@@ -101,15 +106,18 @@ void main(void)
 void chooseDoor(void) {
     state = ChooseDoor;
     LED_GREEN;
-    startTimeout(10);
+    startTimeout(25);
 }
 
 void openDoor(uint8_t door) {
     switch(door) {
+        case '0':
         case '1':
+            LED_YELLOW;
             DOOR_SINGLE_ON;
             break;
         case '2':
+            LED_PURPLE;
             DOOR_DOUBLE_ON;
             break;
         default:
@@ -117,8 +125,7 @@ void openDoor(uint8_t door) {
     }
 
     state = Opening;
-    LED_YELLOW;
-    startTimeout(1);
+    startTimeout(3);
 }
 
 void stateActive(void) {

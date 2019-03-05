@@ -100,6 +100,8 @@
 //#define LED_RED_ON                                     (LED1_POUT &= ~LED1_PIN)
 #define LED_GREEN          (LED1_POUT = LED1_POUT & 0xF8 | LED1_PIN | LED3_PIN)
 #define LED_YELLOW                    (LED1_POUT = LED1_POUT & 0xF8 | LED3_PIN)
+#define LED_PURPLE                    (LED1_POUT = LED1_POUT & 0xF8 | LED2_PIN)
+#define LED_WHITE                                (LED1_POUT = LED1_POUT & 0xF8)
 //#define LED_GREEN_OFF                                   (LED1_POUT |= LED2_PIN)
 //#define LED_GREEN_ON                                   (LED1_POUT &= ~LED2_PIN)
 #define LED_BLUE           (LED1_POUT = LED1_POUT & 0xF8 | LED1_PIN | LED2_PIN)
