@@ -19,10 +19,8 @@ uint8_t *uid;
 tState state = Active;
 uint8_t nfcStatus;
 uint16_t pause;
-uint8_t nfcDuty;
-#define NFC_DUTY_RATIO 4
-
-extern tCaptivateApplication g_uiApp;
+//uint8_t nfcDuty;
+//#define NFC_DUTY_RATIO 4
 
 void main(void)
 {
@@ -43,7 +41,7 @@ void main(void)
 
 	capTouchInit();
 	nfcInit();
-	nfcDuty = NFC_DUTY_RATIO;
+	//nfcDuty = NFC_DUTY_RATIO;
 
 	//
 	// Start the CapTIvate application
@@ -55,21 +53,20 @@ void main(void)
 	//
 	while(1)
 	{
-        LED_BLUE_OFF;
+        //LED_BLUE_OFF;
 
 	    switch(state) {
 
             case Active:
             case AddTag:
                 // Check CapTouch
+                LED_BLUE_OFF;
                 CAPT_appHandler();
 
-                if (g_uiApp.state == eUIActiveNoTouch)
-                    break;
                 // Only scan NFC every N times for captouch performance
-                if (--nfcDuty)
-                    break;
-                nfcDuty = NFC_DUTY_RATIO;
+                //if (--nfcDuty)
+                //    break;
+                //nfcDuty = NFC_DUTY_RATIO;
                 nfcStatus = NFC_Find14443A();
                 if (nfcStatus == STATUS_SUCCESS) {
                     uidSize = ISO14443A_getUidSize();
@@ -111,7 +108,6 @@ void chooseDoor(void) {
 
 void openDoor(uint8_t door) {
     switch(door) {
-        case '0':
         case '1':
             LED_YELLOW;
             DOOR_SINGLE_ON;
@@ -119,6 +115,10 @@ void openDoor(uint8_t door) {
         case '2':
             LED_PURPLE;
             DOOR_DOUBLE_ON;
+            break;
+        case '3':
+            LED_BLUE;
+            DOOR_BOTH_ON;
             break;
         default:
             return;

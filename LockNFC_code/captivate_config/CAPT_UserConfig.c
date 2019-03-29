@@ -594,7 +594,7 @@ tCaptivateApplication g_uiApp =
     .bElementDataTxEnable = true,
     .bSensorDataTxEnable = true,
     .ui16ActiveModeScanPeriod = 33,
-    .ui16WakeOnProxModeScanPeriod = 100, // was 100
-    .ui16InactivityTimeout = 128, // was 32
+    .ui16WakeOnProxModeScanPeriod = 100,
+    .ui16InactivityTimeout = 32,
     .ui8WakeupInterval = 5,
 };
