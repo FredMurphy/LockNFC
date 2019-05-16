@@ -19,8 +19,8 @@ uint8_t *uid;
 tState state = Active;
 uint8_t nfcStatus;
 uint16_t pause;
-//uint8_t nfcDuty;
-//#define NFC_DUTY_RATIO 4
+uint8_t nfcDuty;
+#define NFC_DUTY_RATIO 4
 
 void main(void)
 {
@@ -41,7 +41,7 @@ void main(void)
 
 	capTouchInit();
 	nfcInit();
-	//nfcDuty = NFC_DUTY_RATIO;
+	nfcDuty = NFC_DUTY_RATIO;
 
 	//
 	// Start the CapTIvate application
@@ -64,9 +64,10 @@ void main(void)
                 CAPT_appHandler();
 
                 // Only scan NFC every N times for captouch performance
-                //if (--nfcDuty)
-                //    break;
-                //nfcDuty = NFC_DUTY_RATIO;
+                if (--nfcDuty)
+                    break;
+                nfcDuty = NFC_DUTY_RATIO;
+
                 nfcStatus = NFC_Find14443A();
                 if (nfcStatus == STATUS_SUCCESS) {
                     uidSize = ISO14443A_getUidSize();

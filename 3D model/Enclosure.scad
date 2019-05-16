@@ -58,12 +58,10 @@ module m3screw() {
 }
 
 module cable() {
-cableY=62;
+    cableY=62;
 
     translate([wallThick, (boxY-cableY)/2, -1])
             cube([boxX-2*wallThick,cableY, boxZ]);
-    //translate([boxX/2,boxY/2,-1])
-    //    cube([7.5,7.5,boxZ], center=true);
 }
 
 module mounting() {
@@ -95,4 +93,4 @@ module slot() {
 
 upper();
 lower();
-//%PCB();
+%PCB();
